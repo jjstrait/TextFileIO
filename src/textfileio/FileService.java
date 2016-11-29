@@ -45,6 +45,9 @@ public class FileService {
     public void setWriter(TextWriterStrategy writer) {
         this.writer = writer;
     }
+     public void writeToFile(List<Map<String,String>> info, boolean isAppedable) throws IOException{
+         writer.writeToFile(info, isAppedable);
+     }
     
     
 }

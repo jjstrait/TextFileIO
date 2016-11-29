@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +36,9 @@ public class TextFileWriter implements TextWriterStrategy {
 
     @Override
     public void writeToFile(List<Map<String,String>> info, boolean isAppedable) throws IOException{
+        if(info == null){
+        throw new IllegalArgumentException("ListMap is null");
+        }
     File data = new File(filePath);
     PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(data, isAppedable)));
 	  out.print(format.encode(info));
@@ -66,5 +70,20 @@ public class TextFileWriter implements TextWriterStrategy {
             throw new IllegalArgumentException("File path is empty");
         }
         this.filePath = filePath;
+    }
+    
+    public static void main(String[] args) throws IOException {
+            String filePath =  "src"+File.separatorChar+"Garage.txt";
+    
+    TextFileFormatStrategy format = new CustomGarageFormat();
+    TextWriterStrategy writer = new TextFileWriter(format,filePath);
+    List<Map<String,String>> garageData = new ArrayList<>();
+    Map<String,String> record = new HashMap();
+    record.put("totalHours", "65.3");
+    record.put("totalFees", "55.2");
+    
+    
+    
+    writer.writeToFile(garageData, false);
     }
 }
