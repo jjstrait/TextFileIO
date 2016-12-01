@@ -35,7 +35,9 @@ public class Startup {
     record.put("totalFees", "55.2");
     garageData.add(record);
     info.writeToFile(garageData, false);
+    
     System.out.println(info.readFile());
+    
     }catch(IllegalArgumentException e){
         System.out.println(e.getMessage());
     }

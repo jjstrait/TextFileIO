@@ -17,6 +17,9 @@ import java.util.Map;
 public class CustomGarageFormat implements TextFileFormatStrategy{
     
     public String encode(List<Map<String,String>> dataFromApp){
+        if(dataFromApp == null){
+        throw new IllegalArgumentException("Map from app is null");
+        }
         Map<String,String> sourceData = dataFromApp.get(0);
         String sTotalHours = sourceData.get("totalHours");
         String sTotalFees = sourceData.get("totalFees");
@@ -24,6 +27,9 @@ public class CustomGarageFormat implements TextFileFormatStrategy{
         return sTotalHours + "\n"+ sTotalFees +"\n";
     }
     public List<Map<String,String>> decode(List<String> dataFromFile){
+        if(dataFromFile == null){
+        throw new IllegalArgumentException("No lines from file read. list is null");
+        }
         String sTotalHours = dataFromFile.get(0);
         String sTotalFees = dataFromFile.get(1);
         

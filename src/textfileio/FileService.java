@@ -30,7 +30,10 @@ public class FileService {
     }
     
     
-    public void setReader(TextReaderStrategy reader) {
+    public void setReader(TextReaderStrategy reader) throws IllegalArgumentException {
+        if(reader == null){
+        throw new IllegalArgumentException("Reader is null");
+        }
         this.reader = reader;
     }
     
@@ -42,7 +45,10 @@ public class FileService {
         return writer;
     }
 
-    public void setWriter(TextWriterStrategy writer) {
+    public void setWriter(TextWriterStrategy writer) throws IllegalArgumentException{
+        if(writer == null){
+        throw new IllegalArgumentException("Writer is null");
+        }
         this.writer = writer;
     }
      public void writeToFile(List<Map<String,String>> info, boolean isAppedable) throws IOException{
