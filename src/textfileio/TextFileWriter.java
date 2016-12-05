@@ -72,18 +72,5 @@ public class TextFileWriter implements TextWriterStrategy {
         this.filePath = filePath;
     }
     
-    public static void main(String[] args) throws IOException {
-            String filePath =  "src"+File.separatorChar+"Garage.txt";
     
-    TextFileFormatStrategy format = new CustomGarageFormat();
-    TextWriterStrategy writer = new TextFileWriter(format,filePath);
-    List<Map<String,String>> garageData = new ArrayList<>();
-    Map<String,String> record = new HashMap();
-    record.put("totalHours", "65.3");
-    record.put("totalFees", "55.2");
-    
-    
-    
-    writer.writeToFile(garageData, false);
-    }
 }

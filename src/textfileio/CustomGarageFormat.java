@@ -16,17 +16,25 @@ import java.util.Map;
  */
 public class CustomGarageFormat implements TextFileFormatStrategy{
     
-    public String encode(List<Map<String,String>> dataFromApp){
+    private final String TOTAL_HOURS_ID = "totalHours";
+    private final String TOTAL_FEES_ID = "totalFees";
+    
+    public String encode(List<Map<String,String>> dataFromApp) throws IllegalArgumentException{
+        String lineFeed = "\n";
+        
         if(dataFromApp == null){
         throw new IllegalArgumentException("Map from app is null");
         }
-        Map<String,String> sourceData = dataFromApp.get(0);
-        String sTotalHours = sourceData.get("totalHours");
-        String sTotalFees = sourceData.get("totalFees");
         
-        return sTotalHours + "\n"+ sTotalFees +"\n";
+        Map<String,String> sourceData = dataFromApp.get(0);
+        String sTotalHours = sourceData.get(TOTAL_HOURS_ID);
+        String sTotalFees = sourceData.get(TOTAL_FEES_ID);
+        
+        return sTotalHours + lineFeed+ sTotalFees +lineFeed;
     }
-    public List<Map<String,String>> decode(List<String> dataFromFile){
+    
+    
+    public List<Map<String,String>> decode(List<String> dataFromFile) throws IllegalArgumentException{
         if(dataFromFile == null){
         throw new IllegalArgumentException("No lines from file read. list is null");
         }
@@ -35,8 +43,8 @@ public class CustomGarageFormat implements TextFileFormatStrategy{
         
         List<Map<String,String>> fileData = new ArrayList<>();
         Map<String,String> record = new HashMap();
-        record.put("totalHours", sTotalHours);
-        record.put("totalFees", sTotalFees);
+        record.put(TOTAL_HOURS_ID, sTotalHours);
+        record.put(TOTAL_FEES_ID, sTotalFees);
         
         fileData.add(record);
         

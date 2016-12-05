@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
@@ -18,13 +20,15 @@ import java.util.Map;
  */
 public class Startup {
     public static void main(String[] args) throws IOException {
-        String filePath =  "src"+File.separatorChar+"Garage.txt";
+       
     try{
-    TextFileFormatStrategy format = new CustomGarageFormat();
-    TextWriterStrategy writer = new TextFileWriter(format,filePath);
-    TextReaderStrategy reader = new TextFileReader(format,filePath);
     
-    FileService info = new FileService(reader,writer);
+    final AbstractApplicationContext ctx = new ClassPathXmlApplicationContext("fileIOContext.xml");
+        
+   
+  
+    
+    FileService info = (FileService)ctx.getBean("fileService");
     
     
     
